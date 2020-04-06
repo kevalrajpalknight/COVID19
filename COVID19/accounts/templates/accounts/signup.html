@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+{% load bootstrap3 %}
+{% block head_style %} 
+
+body{
+	background: url("{% static 'images/background.jpg' %}") no-repeat;
+}
+
+{% endblock %}
+
+{% block content %}
+<div class="modal-dialog">
+
+	<!-- Modal content-->
+	<div class="modal-content">
+	<div class="modal-header">
+		<h4 class="modal-title">En registrement!</h4>
+	</div>
+	<form method="POST">
+		<div class="modal-body">
+			{% csrf_token %}
+			{% bootstrap_form form layout='inline' %}
+		
+		</div>
+		<div class="modal-footer">
+			<input type="submit" name="" class="button" style="color:black" value="En registrement">
+		</div>
+	</form>
+	</div>
+
+</div>
+{% endblock %}

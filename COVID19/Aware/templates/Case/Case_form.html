@@ -1,0 +1,33 @@
+{% extends 'Case/Case_base.html' %}
+{% load static %}
+{% load bootstrap3 %}
+{% block head_style %} 
+
+body{
+	background: url("{% static 'images/background.jpg' %}") no-repeat;
+}
+
+{% endblock %}
+
+{% block case_content %}
+<div class="modal-dialog">
+
+	<!-- Modal content-->
+	<div class="modal-content">
+	<div class="modal-header bg-dark">
+		<h4 class="modal-title text-light">Ajouter un cas!</h4>
+	</div>
+	<form method="POST"  id="CaseForm" action="{% url 'case:create' %}">
+		<div class="modal-body">
+			{% csrf_token %}
+			{% bootstrap_form form layout='inline' %}
+		
+		</div>
+		<div class="modal-footer">
+			<input type="submit" name="" class="btn btn-dark btn-lg text-light" style="color:black" value="Ajouter">
+		</div>
+	</form>
+	</div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+    {% load static %}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <title>Fight Covid19</title>
+    <link rel="shortcut icon" href="{% static 'images/flag.ico' %}">
+    {% block header %}{% endblock %}
+    <style> 
+      html { 
+
+          height: 100%; 
+      }
+      body {
+          height: 100%;
+          font-family:Verdana,sans-serif, Arial;
+          color:#000;
+          margin: 0; 
+          font-size:14px;
+          padding: 0; 
+      }
+      .button{
+          width: 220px;
+          font-family:Verdana,sans-serif, Arial;
+          font-size:12px;
+          padding:4px 0;
+          color:#333;
+          border-radius: 5px 5px 5px 5px;
+      }
+      {% block head_style %} {% endblock %}
+</style>
+</head>
+<body>
+<nav class="navbar navbar-expand-md bg-dark navbar-dark sticky-top">
+    <a class="navbar-brand" href="{% url 'home' %}">COVID 19</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        {% if user.is_authenticated %}
+        <ul class="navbar navbar-nav justify-content-end">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'case:all' %}">Rapports</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'case:create' %}">Ajouter un cas</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'accounts:logout' %}">Déconnexion</a>
+            </li>
+        </ul>
+        {% else %}
+        <ul class="nav navbar-nav justify-content-end">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'accounts:login' %}">Connexion</a>
+            </li>
+        </ul>
+        {% endif %}
+    </div>  
+  </nav>
+  <br/>
+{% block content %} Base {% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+{% extends 'Case/Case_base.html' %}
+{% load static %}
+{% block pre_case %}
+	<table class="table table-striped">
+		<thead class="thead-dark">
+		  <tr>
+			<th>Location</th>
+			<th>Statut</th>
+			<th>Nombre de cas</th>
+		  </tr>
+		</thead>
+		<tbody>
+			{% for case in object_list.Cases %}
+				{% if case.case_type %}
+				<tr class = "table-danger">
+					<td>{{case.address}}</td>
+					<td>Positif</td>
+					<td>{{case.total}}</td>
+				</tr>
+				{% else %}
+				<tr class = "table-warning">
+					<td>{{case.address}}</td>
+					<td>Suspect</td>
+					<td>{{case.total}}</td>
+				</tr>
+				{% endif %}
+			{% endfor %}
+		</tbody>
+	  </table>
+{% endblock %}
