@@ -11,7 +11,7 @@ def join(Case,Location):
 class Home(ListView):
     template_name = 'index.html'
     model = Case
-    queryset = {"Cases":Case.objects.all().values('address', 'case_type','user').annotate(total=Count('address')).order_by('address','total','case_type'),
+    def queryset(self): return {"Cases":Case.objects.all().values('address', 'case_type','user').annotate(total=Count('address')).order_by('address','total','case_type'),
                 "Location": join(Case, Location)}
 
 class TestPage(TemplateView):

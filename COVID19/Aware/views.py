@@ -1,17 +1,14 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
-from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
-from django.http import Http404
 from django.views import  generic
 from . import models
 from django.contrib import messages
 from . import forms
 from braces.views import SelectRelatedMixin
 from django.contrib.auth import get_user_model
-from .models import Case, Location
+from .models import Case
 from django.db.models import Count
 User = get_user_model()
 
@@ -19,7 +16,8 @@ User = get_user_model()
 class CaseList(generic.ListView):
     model = models.Case
     template_name = 'Case/Case_list.html'
-    queryset = {"Cases":Case.objects.all().values('address', 'case_type').annotate(total=Count('address')).order_by('address','total','case_type'),}
+    def get_queryset(self):
+        return Case.objects.all().values('address', 'case_type').annotate(total=Count('address')).order_by('address','total','case_type')
 
 
 class CreateCase(LoginRequiredMixin, SelectRelatedMixin, generic.CreateView):
